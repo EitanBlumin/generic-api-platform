@@ -1,14 +1,14 @@
 # generic-api-platform
 Generic SQL Server platform for configuring and running API requests via HTTP
 
-# Tables
+## Tables
 A set of tables will be used to save data needed for communicating with external APIs:
 
-* **API_Type** (name, icon, enabled)
-    * **API_Headers** (name, value, allow API field placeholders)
-    * **API_Fields** (name, API type, data type, default value)
-    * *API_Targets* (name, description, API type, enabled)
-        * *API_TargetFieldValues* (API target, field, value)
+* **api_Type** (name, icon, enabled)
+    * **api_Headers** (name, value, allow API field placeholders)
+    * **api_Fields** (name, API type, data type, default value)
+    * *api_Targets* (name, description, API type, enabled)
+        * *api_TargetFieldValues* (API target, field, value)
 
 Each API_Type record will also have the following (static) generic fields:
 
@@ -23,18 +23,18 @@ Each of the above fields would also support placeholders that would be replaced 
 Something like `$(parameter[fieldname])` or whatever generic like that.
 For example: `$(parameter[authToken])`
 
-`API_Type`, `API_Headers` and `API_Fields` are non-changeable "system" tables.
-`API_Targets` and `API_TargetFieldValues` are user managed.
+`api_Type`, `api_Headers` and `api_Fields` are non-changeable "system" tables.
+`api_Targets` and `api_TargetFieldValues` are user managed.
 
 ## Programmability Modules
 
-* Scalar function: `GetAPIFieldValue(api_target, field_name)`
-* Table function: `GetAPIType(api_name)`
-* Procedure: `SetAPIFieldValue(api_target, field_name, field_value)`
-* Procedure: `RunAPITarget(api_target, TBD)`
-* Scalar function: `FillPlaceholdersByAPI(text_template, APITargetID)`
+* Scalar function: `api_GetFieldValue(api_target_id, field_name)`
+* Table function: `api_GetAPIType(api_type_id)`
+* Procedure: `api_RunTarget(api_target_id, response OUTPUT, debug)`
+* Scalar function: `api_FillPlaceholders(text_template, api_target_id)`
+* Procedure: `api_SetFieldValue(api_target_id, field_name, field_value)`
 
-# Design
+## Design
 
 API_Headers will be used for specifying headers for the `clr_http_request` function (such as Content-Type, Authentication settings, etc). Their values will support placeholders from the API target field values.
 
