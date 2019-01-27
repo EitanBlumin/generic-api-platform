@@ -134,6 +134,7 @@
     <Build Include="Functions\clr_http_request.sql" />
     <Build Include="Functions\api_GetAPIType.sql" />
     <Build Include="Stored Procedures\api_RunTarget.sql" />
+    <Build Include="Stored Procedures\api_SetFieldValue.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assemblies\ClrHttpRequest.dll" />
