@@ -20,10 +20,12 @@ Each API_Type record will also have the following (static) generic fields:
 * Alt_Method (GET/POST/PUT/DELETE)
 
 Each of the above fields would also support placeholders that would be replaced by the user-specified target field values.
+
 Something like `$(parameter[fieldname])` or whatever generic like that.
 For example: `$(parameter[authToken])`
 
 `api_Type`, `api_Headers` and `api_Fields` are non-changeable "system" tables.
+
 `api_Targets` and `api_TargetFieldValues` are user managed.
 
 ## Programmability Modules
