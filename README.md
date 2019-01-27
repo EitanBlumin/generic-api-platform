@@ -21,8 +21,8 @@ Each `api_Type` record will also have the following (static) generic fields:
 
 Each of the above fields would also support placeholders that would be replaced by the user-specified target field values.
 
-Something like `$(parameter[fieldname])` or whatever generic like that.
-For example: `$(parameter[authToken])`
+Something like `@(parameter[fieldname])` or whatever generic like that.
+For example: `@(parameter[authToken])`
 
 `api_Type`, `api_Headers` and `api_Fields` are non-changeable "system" tables.
 
