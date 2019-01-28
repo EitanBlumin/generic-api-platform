@@ -20,6 +20,12 @@ AS
 	FROM api_Target
 	WHERE ID = @api_target_id;
 
+	IF @api_type_id IS NULL
+	BEGIN
+		RAISERROR(N'API Target ID %d not found!', 16,1, @api_target_id);
+		RETURN -1;
+	END
+
 	SET @headers = (
 		SELECT [@Name] = [HeaderName], [text()] = CASE WHEN AllowPlaceholders = 1 THEN dbo.api_FillPlaceholders([HeaderValue], @api_target_id) ELSE [HeaderValue] END
 		FROM api_Headers
@@ -35,6 +41,12 @@ AS
 		@payload = dbo.api_FillPlaceholders(Payload, @api_target_id)
 	FROM dbo.api_GetAPIType(@api_type_id)
 	
+	IF @uri IS NULL
+	BEGIN
+		RAISERROR(N'URI not found for API Target ID %d!', 16,1, @api_target_id);
+		RETURN -1;
+	END
+
 	IF @debug = 1
 	BEGIN
 		PRINT @headers

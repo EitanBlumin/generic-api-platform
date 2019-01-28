@@ -13,7 +13,7 @@
     <RootPath>
     </RootPath>
     <RootNamespace>GenericAPIPlatformDB</RootNamespace>
-    <AssemblyName>GenericAPIPlatformDB</AssemblyName>
+    <AssemblyName>ClrHttpRequest</AssemblyName>
     <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -84,6 +84,8 @@
     <Recovery>FULL</Recovery>
     <EnableFullTextSearch>True</EnableFullTextSearch>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <AssemblyOwner>dbo</AssemblyOwner>
+    <PermissionSet>UNSAFE</PermissionSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -121,7 +123,6 @@
     <Folder Include="Tables\" />
     <Folder Include="Functions\" />
     <Folder Include="Stored Procedures\" />
-    <Folder Include="Assemblies\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\api_Headers.sql" />
@@ -131,22 +132,21 @@
     <Build Include="Tables\api_Type.sql" />
     <Build Include="Functions\api_GetFieldValue.sql" />
     <Build Include="Functions\api_FillPlaceholders.sql" />
-    <Build Include="Functions\clr_http_request.sql" />
     <Build Include="Functions\api_GetAPIType.sql" />
     <Build Include="Stored Procedures\api_RunTarget.sql" />
     <Build Include="Stored Procedures\api_SetFieldValue.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assemblies\ClrHttpRequest.dll" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="ClrHttpRequest">
-      <HintPath>Assemblies\ClrHttpRequest.dll</HintPath>
-      <SqlAssemblyName>ClrHttpRequest</SqlAssemblyName>
-      <IsModelAware>True</IsModelAware>
-      <GenerateSqlClrDdl>False</GenerateSqlClrDdl>
-      <SqlOwnerName>dbo</SqlOwnerName>
-      <SqlPermissionSet>UNSAFE</SqlPermissionSet>
-    </Reference>
+    <Compile Include="Functions\clr_http_request.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GenericAPIPlatformDB.publish.xml" />
   </ItemGroup>
 </Project>
