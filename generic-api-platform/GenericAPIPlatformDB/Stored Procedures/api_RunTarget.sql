@@ -18,7 +18,7 @@ AS
 
 	SELECT @api_type_id = APITypeID
 	FROM api_Target
-	WHERE TargetID = @api_target_id;
+	WHERE ID = @api_target_id;
 
 	SET @headers = (
 		SELECT [@Name] = [HeaderName], [text()] = CASE WHEN AllowPlaceholders = 1 THEN dbo.api_FillPlaceholders([HeaderValue], @api_target_id) ELSE [HeaderValue] END
